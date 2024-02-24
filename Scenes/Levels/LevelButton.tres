@@ -1,0 +1,16 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cb5hpgt3id17o"]
+
+[ext_resource type="Texture2D" uid="uid://bsn770i27qr45" path="res://Assets/Images/SelectionMenu/level_square.png" id="1_fkyqj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4p78x"]
+texture = ExtResource("1_fkyqj")
+modulate_color = Color(0.87451, 0.854902, 0.87451, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fy7l0"]
+texture = ExtResource("1_fkyqj")
+
+[resource]
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 2
+Button/styles/hover = SubResource("StyleBoxTexture_4p78x")
+Button/styles/normal = SubResource("StyleBoxTexture_fy7l0")

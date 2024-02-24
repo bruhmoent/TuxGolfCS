@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfsj1r1o1yix1"]
+
+[ext_resource type="SpriteFrames" uid="uid://ctbkcty7p00hw" path="res://Scenes/Objects/Bumpers/BumperLeft.tres" id="1_8qy5u"]
+[ext_resource type="Script" path="res://Scenes/Objects/Bumpers/BumperRight.cs" id="1_q0pqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vak5"]
+size = Vector2(9, 31)
+
+[node name="BumperRight" type="Area2D"]
+script = ExtResource("1_q0pqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -0.5)
+shape = SubResource("RectangleShape2D_4vak5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -1)
+sprite_frames = ExtResource("1_8qy5u")
+frame = 5
+frame_progress = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

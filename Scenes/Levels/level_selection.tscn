@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://de1mwbuvjtfly"]
+
+[ext_resource type="Texture2D" uid="uid://cvut4f7m8jxk2" path="res://Assets/Images/SceneAssets/world1.png" id="2_t377g"]
+[ext_resource type="Theme" uid="uid://cb5hpgt3id17o" path="res://Scenes/Levels/LevelButton.tres" id="3_sws05"]
+[ext_resource type="Script" path="res://Scenes/Levels/LevelFlow.cs" id="3_uvlpi"]
+[ext_resource type="AudioStream" uid="uid://cl2mhra5q5hjv" path="res://Assets/Music/world1.ogg" id="4_lhubr"]
+[ext_resource type="PackedScene" uid="uid://bswgt5j2xdplq" path="res://coin_display.tscn" id="5_si3vj"]
+[ext_resource type="Texture2D" uid="uid://b1cpr2somwe8j" path="res://Assets/Images/SceneAssets/world_title1.png" id="6_6pp0h"]
+
+[node name="Overworld_LS" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(615, 516)
+scale = Vector2(1.27437, 1.05567)
+texture = ExtResource("2_t377g")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.76, 16.2)
+script = ExtResource("3_uvlpi")
+
+[node name="Level1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 8.06676
+offset_top = 2.09877
+offset_right = 70.0668
+offset_bottom = 33.0988
+scale = Vector2(0.0477755, 0.173045)
+theme = ExtResource("3_sws05")
+text = "1"
+
+[node name="Level2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 19.0542
+offset_top = 4.1358
+offset_right = 81.0542
+offset_bottom = 35.1358
+scale = Vector2(0.0477755, 0.173045)
+theme = ExtResource("3_sws05")
+text = "2"
+
+[node name="Level3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 29.9374
+offset_top = 10.9877
+offset_right = 91.9374
+offset_bottom = 41.9877
+scale = Vector2(0.0477755, 0.173045)
+theme = ExtResource("3_sws05")
+text = "3"
+
+[node name="Level4" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 22.0793
+offset_top = 17.963
+offset_right = 84.0793
+offset_bottom = 48.963
+scale = Vector2(0.0477755, 0.173045)
+theme = ExtResource("3_sws05")
+text = "4"
+
+[node name="Level5" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 11.057
+offset_top = 23.0247
+offset_right = 73.057
+offset_bottom = 54.0247
+scale = Vector2(0.0477755, 0.173045)
+theme = ExtResource("3_sws05")
+text = "5"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lhubr")
+autoplay = true
+
+[node name="CoinDisplay" parent="." instance=ExtResource("5_si3vj")]
+offset = Vector2(20, 20)
+scale = Vector2(1.68, 1.68)
+transform = Transform2D(1.68, 0, 0, 1.68, 20, 20)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1051, 61)
+texture = ExtResource("6_6pp0h")
+
+[connection signal="pressed" from="Control/Level1" to="Control" method="_on_level_1_pressed"]
+[connection signal="pressed" from="Control/Level2" to="Control" method="_on_level_2_pressed"]
+[connection signal="pressed" from="Control/Level3" to="Control" method="_on_level_3_pressed"]
+[connection signal="pressed" from="Control/Level4" to="Control" method="_on_level_4_pressed"]
+[connection signal="pressed" from="Control/Level5" to="Control" method="_on_level_5_pressed"]

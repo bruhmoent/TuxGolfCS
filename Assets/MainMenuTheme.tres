@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cyx65s5crkiw8"]
+
+[ext_resource type="Texture2D" uid="uid://bs64cxn8bii2q" path="res://Assets/Images/Menu/log_frame.png" id="1_gt63i"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkcic"]
+texture = ExtResource("1_gt63i")
+modulate_color = Color(0.873298, 0.873298, 0.873298, 0.784314)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uu8ps"]
+texture = ExtResource("1_gt63i")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 2
+Button/styles/hover = SubResource("StyleBoxTexture_qkcic")
+Button/styles/normal = SubResource("StyleBoxTexture_uu8ps")

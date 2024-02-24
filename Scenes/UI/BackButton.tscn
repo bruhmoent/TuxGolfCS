@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsndfgjabk1xk"]
+
+[ext_resource type="Script" path="res://Scenes/UI/BackButton.cs" id="1_513ph"]
+[ext_resource type="Theme" uid="uid://cb5hpgt3id17o" path="res://Scenes/Levels/LevelButton.tres" id="1_fupr6"]
+
+[node name="BackButton" type="CanvasLayer"]
+offset = Vector2(20, 600)
+transform = Transform2D(1, 0, 0, 1, 20, 600)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_513ph")
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(1.36, 1.36)
+theme = ExtResource("1_fupr6")
+text = "Back"
+
+[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]

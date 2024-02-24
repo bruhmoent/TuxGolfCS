@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://qlciy08nd40a"]
+
+[ext_resource type="Script" path="res://Scenes/Creatures/Player.cs" id="1_7be63"]
+[ext_resource type="Texture2D" uid="uid://bw7xy8kxkc206" path="res://Scenes/Creatures/Gux.png" id="1_26dfj"]
+[ext_resource type="Texture2D" uid="uid://bif5fwkupumiy" path="res://Assets/Images/SceneAssets/temaplte.png" id="3_3p6r8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oxy2v"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_7be63")
+
+[node name="DirectionIndicatorSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_3p6r8")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_26dfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_oxy2v")

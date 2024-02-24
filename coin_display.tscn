@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bswgt5j2xdplq"]
+
+[ext_resource type="Script" path="res://CoinDisplay.cs" id="1_60dbl"]
+[ext_resource type="SpriteFrames" uid="uid://mg3sabs8bpij" path="res://Assets/Images/SceneAssets/Coin/coin.tres" id="2_bvqob"]
+
+[node name="CoinDisplay" type="CanvasLayer"]
+script = ExtResource("1_60dbl")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "    0"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 12)
+scale = Vector2(0.64, 0.64)
+sprite_frames = ExtResource("2_bvqob")
+autoplay = "default"
+frame = 13

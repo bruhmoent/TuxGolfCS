@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://4yy5qbntf6ap"]
+
+[ext_resource type="PackedScene" uid="uid://be75vepg1s6y" path="res://coin.tscn" id="1_2cs74"]
+[ext_resource type="PackedScene" uid="uid://bkgwa85htiwkh" path="res://Scenes/Objects/Bumpers/BumperLeft.tscn" id="2_56ay7"]
+[ext_resource type="Script" path="res://CoinBrushTileMap.cs" id="2_ap5cg"]
+[ext_resource type="PackedScene" uid="uid://cfsj1r1o1yix1" path="res://Scenes/Objects/Bumpers/BumperRight.tscn" id="3_hmitv"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2v0ai"]
+resource_name = "CoinBrush"
+scenes/1/scene = ExtResource("1_2cs74")
+scenes/2/scene = ExtResource("2_56ay7")
+scenes/3/scene = ExtResource("3_hmitv")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pr7jy"]
+
+[sub_resource type="TileSet" id="TileSet_24bne"]
+sources/0 = SubResource("TileSetScenesCollectionSource_2v0ai")
+sources/1 = SubResource("TileSetScenesCollectionSource_pr7jy")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_24bne")
+rendering_quadrant_size = 32
+format = 2
+layer_0/name = "Coin_Interactive"
+script = ExtResource("2_ap5cg")
