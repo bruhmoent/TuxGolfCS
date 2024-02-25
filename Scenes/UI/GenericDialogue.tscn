@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cj8x4s21v7nh3"]
+
+[ext_resource type="Script" path="res://GenericDialogue.cs" id="1_poiqo"]
+[ext_resource type="Texture2D" uid="uid://bs64cxn8bii2q" path="res://Assets/Images/Menu/log_frame.png" id="2_xrv0i"]
+[ext_resource type="Texture2D" uid="uid://c5o51x0ak3ma7" path="res://Assets/Images/Menu/menu.png" id="3_akwb2"]
+[ext_resource type="Texture2D" uid="uid://b4b1ivw8rsyct" path="res://Scenes/UI/phone_guy.png" id="4_te3nd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fa8u6"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_poiqo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(329, 1)
+scale = Vector2(0.238639, 0.458876)
+texture = ExtResource("2_xrv0i")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(154, 0.999998)
+scale = Vector2(1.02335, 0.10886)
+texture = ExtResource("3_akwb2")
+
+[node name="DialogueLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 2.0
+offset_top = -25.0
+offset_right = 302.0
+offset_bottom = 25.0
+bbcode_enabled = true
+
+[node name="PhoneGuy" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(329, 1)
+texture = ExtResource("4_te3nd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fa8u6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
