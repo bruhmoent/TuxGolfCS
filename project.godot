@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Scenes/SceneManager.cs"
 CoinData="*res://CoinData.cs"
+GlobalSignals="*res://Scenes/Objects/SpawnPoint/GlobalSignals.tscn"
 
 [dotnet]
 

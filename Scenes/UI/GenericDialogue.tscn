@@ -17,27 +17,27 @@ grow_vertical = 2
 script = ExtResource("1_poiqo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(329, 1)
+position = Vector2(386, 0)
 scale = Vector2(0.238639, 0.458876)
 texture = ExtResource("2_xrv0i")
 
 [node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(154, 0.999998)
-scale = Vector2(1.02335, 0.10886)
+scale = Vector2(1.34335, 0.1429)
 texture = ExtResource("3_akwb2")
 
 [node name="DialogueLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 2.0
-offset_top = -25.0
-offset_right = 302.0
-offset_bottom = 25.0
+offset_left = -14.0
+offset_top = -27.0
+offset_right = 286.0
+offset_bottom = 23.0
+scale = Vector2(1.12, 1.12)
 bbcode_enabled = true
 
 [node name="PhoneGuy" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(329, 1)
+position = Vector2(386, 0)
 texture = ExtResource("4_te3nd")
 
 [node name="Area2D" type="Area2D" parent="."]

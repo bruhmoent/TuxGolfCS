@@ -18,3 +18,13 @@ texture = ExtResource("1_26dfj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_oxy2v")
+
+[node name="HeartsCanvas" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HeartsCanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="PlayerDied" from="." to="." method="_on_player_died"]

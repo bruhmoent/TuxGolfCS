@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bdxo4q00l1xke"]
+[gd_scene load_steps=30 format=3 uid="uid://bdxo4q00l1xke"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/Level1.cs" id="1_ge7il"]
 [ext_resource type="PackedScene" uid="uid://qlciy08nd40a" path="res://Scenes/Creatures/Player.tscn" id="1_ti702"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://bqrmrr7fijwsi" path="res://Assets/Music/objects/collect1.ogg" id="13_mkhfa"]
 [ext_resource type="PackedScene" uid="uid://fbdscnleoylm" path="res://leaves_node.tscn" id="19_xmkmk"]
 [ext_resource type="PackedScene" uid="uid://cj8x4s21v7nh3" path="res://Scenes/UI/GenericDialogue.tscn" id="20_u8jmk"]
+[ext_resource type="PackedScene" uid="uid://df2ssl51ttmyg" path="res://Scenes/Objects/SpawnPoint/SpawnPoint.tscn" id="21_ah484"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_32w8q"]
 texture = ExtResource("3_v7a5w")
@@ -885,7 +886,7 @@ transform = Transform2D(1.5, 0, 0, 1.5, 20, 20)
 
 [node name="TileMap2" parent="." instance=ExtResource("11_76o77")]
 position = Vector2(457, 156)
-layer_0/tile_data = PackedInt32Array(-524234, 0, 196608, 18, 0, 65536, 21, 0, 65536, -262107, 0, 65536, -262103, 0, 65536, -720836, 0, 65536, -851903, 0, 65536, -786362, 0, 65536)
+layer_0/tile_data = PackedInt32Array(-524234, 0, 196608, 18, 0, 65536, 21, 0, 65536, -262107, 0, 65536, -262103, 0, 65536, -720836, 0, 65536, -851903, 0, 65536, -786362, 0, 65536, 262138, 0, 262144, 458750, 0, 327680, 458751, 0, 327680, 393216, 0, 327680)
 
 [node name="PickUp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_mkhfa")
@@ -903,4 +904,10 @@ offset_top = 224.0
 offset_right = 92.0
 offset_bottom = 224.0
 
+[node name="SpawnPoint" parent="." instance=ExtResource("21_ah484")]
+
 [connection signal="body_entered" from="TileMap2/BumperRight" to="TileMap2/BumperRight" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap2/RoundBumper" to="TileMap2/RoundBumper" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap2/Spikes1" to="TileMap2/Spikes1" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap2/@Area2D@122817" to="TileMap2/@Area2D@122817" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap2/@Area2D@122818" to="TileMap2/@Area2D@122818" method="_on_body_entered"]

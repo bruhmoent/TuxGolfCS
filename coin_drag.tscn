@@ -1,15 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://4yy5qbntf6ap"]
+[gd_scene load_steps=10 format=3 uid="uid://4yy5qbntf6ap"]
 
 [ext_resource type="PackedScene" uid="uid://be75vepg1s6y" path="res://coin.tscn" id="1_2cs74"]
 [ext_resource type="PackedScene" uid="uid://bkgwa85htiwkh" path="res://Scenes/Objects/Bumpers/BumperLeft.tscn" id="2_56ay7"]
 [ext_resource type="Script" path="res://CoinBrushTileMap.cs" id="2_ap5cg"]
 [ext_resource type="PackedScene" uid="uid://cfsj1r1o1yix1" path="res://Scenes/Objects/Bumpers/BumperRight.tscn" id="3_hmitv"]
+[ext_resource type="PackedScene" uid="uid://bwljlptjlujrj" path="res://Scenes/Objects/Bumpers/RoundBumper.tscn" id="4_6wc3h"]
+[ext_resource type="PackedScene" uid="uid://dwneojeexdeiy" path="res://Scenes/Objects/Spikes/Spike1.tscn" id="5_8dprs"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2v0ai"]
 resource_name = "CoinBrush"
 scenes/1/scene = ExtResource("1_2cs74")
 scenes/2/scene = ExtResource("2_56ay7")
 scenes/3/scene = ExtResource("3_hmitv")
+scenes/4/scene = ExtResource("4_6wc3h")
+scenes/5/scene = ExtResource("5_8dprs")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_pr7jy"]
 

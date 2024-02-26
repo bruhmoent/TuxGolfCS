@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://de1mwbuvjtfly"]
+[gd_scene load_steps=8 format=3 uid="uid://de1mwbuvjtfly"]
 
 [ext_resource type="Texture2D" uid="uid://cvut4f7m8jxk2" path="res://Assets/Images/SceneAssets/world1.png" id="2_t377g"]
 [ext_resource type="Theme" uid="uid://cb5hpgt3id17o" path="res://Scenes/Levels/LevelButton.tres" id="3_sws05"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cl2mhra5q5hjv" path="res://Assets/Music/world1.ogg" id="4_lhubr"]
 [ext_resource type="PackedScene" uid="uid://bswgt5j2xdplq" path="res://coin_display.tscn" id="5_si3vj"]
 [ext_resource type="Texture2D" uid="uid://b1cpr2somwe8j" path="res://Assets/Images/SceneAssets/world_title1.png" id="6_6pp0h"]
+[ext_resource type="Script" path="res://Scenes/Levels/BackLevelSel.cs" id="7_c4s32"]
 
 [node name="Overworld_LS" type="Node2D"]
 
@@ -85,8 +86,30 @@ transform = Transform2D(1.68, 0, 0, 1.68, 20, 20)
 position = Vector2(1051, 61)
 texture = ExtResource("6_6pp0h")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 608.0
+offset_right = 47.0
+offset_bottom = 648.0
+script = ExtResource("7_c4s32")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(1.36, 1.36)
+theme = ExtResource("3_sws05")
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="Control/Level1" to="Control" method="_on_level_1_pressed"]
 [connection signal="pressed" from="Control/Level2" to="Control" method="_on_level_2_pressed"]
 [connection signal="pressed" from="Control/Level3" to="Control" method="_on_level_3_pressed"]
 [connection signal="pressed" from="Control/Level4" to="Control" method="_on_level_4_pressed"]
 [connection signal="pressed" from="Control/Level5" to="Control" method="_on_level_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]

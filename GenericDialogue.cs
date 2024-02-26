@@ -20,9 +20,9 @@ public partial class GenericDialogue : Control
 
         dialogues = new string[]
         {
-            "Welcome To Galflands!",
+            "[center]Welcome To [i]Galflands![/i][/center]",
             "You can drag your mouse on the screen to change the direction, angle and force of the shot.",
-            "Have fun? ...",
+            "[center]Have fun? [i]...[/i][/center].",
         };
 
         float combinedWidth = spr1.Texture.GetWidth() * spr1.Scale.X + spr2.Texture.GetWidth() * spr2.Scale.X;

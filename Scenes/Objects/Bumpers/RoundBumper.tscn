@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwljlptjlujrj"]
+
+[ext_resource type="Texture2D" uid="uid://cwsyccm8i3x4w" path="res://Scenes/Objects/Bumpers/round_bumper.png" id="1_ik8r5"]
+[ext_resource type="Script" path="res://Scenes/Objects/Bumpers/RoundBumper.cs" id="1_xdqgu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_st7o1"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdh8o"]
+radius = 15.2971
+
+[node name="RoundBumper" type="Area2D"]
+script = ExtResource("1_xdqgu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_st7o1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mdh8o")
+
+[node name="BumperImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_ik8r5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

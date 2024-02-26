@@ -7,7 +7,8 @@
 script = ExtResource("1_60dbl")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
+offset_left = 1.0
+offset_right = 41.0
 offset_bottom = 23.0
 text = "    0"
 

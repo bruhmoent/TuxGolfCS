@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://df2ssl51ttmyg"]
+
+[ext_resource type="Script" path="res://SpawnPoint.cs" id="1_ey3f1"]
+
+[node name="SpawnPoint" type="Node2D"]
+script = ExtResource("1_ey3f1")
+
+[connection signal="PlayerDied" from="." to="." method="_on_player_died"]
