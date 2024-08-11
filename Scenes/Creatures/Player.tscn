@@ -27,4 +27,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="TrajectoryLine" type="Line2D" parent="."]
+width = 4.0
+default_color = Color(1, 1, 1, 0.513726)
+
 [connection signal="PlayerDied" from="." to="." method="_on_player_died"]

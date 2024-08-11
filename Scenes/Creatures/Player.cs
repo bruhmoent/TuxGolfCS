@@ -14,6 +14,8 @@ public partial class Player : CharacterBody2D
 	private const float Gravity = 700.0f;
 	private const float MaxIndicatorLength = 110.0f;
 	private const int MaxHealth = 3;
+	private const float DeathYThreshold = 600.0f;
+	private Line2D trajectoryLine;
 
 	// Variables for golf ball control
 	private Vector2 dragStartPos;
@@ -33,7 +35,7 @@ public partial class Player : CharacterBody2D
 	private float invincibilityDuration = 1.0f;
 	private Timer invincibilityTimer;
 	private Camera2D camera;
-	private float cameraSpeed = 800.0f;
+	private float cameraSpeed = 1200.0f;
 
 	public enum Tags
 	{
@@ -45,6 +47,7 @@ public partial class Player : CharacterBody2D
 	{
 		playerSprite = GetNode<Sprite2D>("PlayerSprite");
 		directionIndicator = GetNode<Sprite2D>("DirectionIndicatorSprite");
+		trajectoryLine = GetNode<Line2D>("TrajectoryLine");
 		UpdateDirectionIndicator();
 		heartsCanvas = GetNode<CanvasLayer>("HeartsCanvas");
 		container = heartsCanvas.GetNode<Control>("Control");
@@ -69,12 +72,12 @@ public partial class Player : CharacterBody2D
 		UpdateHearts();
 	}
 
-	private void GetHurt()
+	public void GetHurt(int multiplier = 1)
 	{
 		if (!isInvincible)
 		{
 			isInvincible = true;
-			currentHealth--;
+			currentHealth -= multiplier;
 			UpdateHearts();
 
 			invincibilityTimer.Start();
@@ -93,8 +96,12 @@ public partial class Player : CharacterBody2D
 		{
 			playerSprite.Visible = !playerSprite.Visible;
 		}
-		
+
 		HandleCameraPeeking((float)delta);
+		if (GlobalPosition.Y > DeathYThreshold)
+		{
+			GetHurt(3);
+		}
 	}
 
 	private void _onInvincibilityTimerTimeout()
@@ -153,17 +160,56 @@ public partial class Player : CharacterBody2D
 
 		if (IsOnFloor())
 		{
-			velocity.X *= 0.95f;
-		}
-		else
-		{
-			velocity.X *= 0.99f;
+			velocity.X *= 0.75f;
 		}
 		Velocity = velocity;
 
 		UpdateIndicatorLength();
 
 		MoveAndSlide();
+		UpdateTrajectory(delta);
+	}
+	
+	private void UpdateTrajectory(double delta)
+	{
+		if (Input.IsActionPressed("ui_click") && IsOnFloor())
+		{
+			trajectoryLine.ClearPoints();
+
+			Vector2 playerCenter = GlobalPosition;
+			Vector2 direction = (dragStartPos - dragEndPos).Normalized();
+			float force = shootingForce;
+			Vector2 velocity = direction * force;
+
+			Vector2 position = playerCenter;
+			float stepSize = (float)delta;
+			int numSteps = 200;
+
+			bool wasOnFloor = true;
+			for (int i = 0; i < numSteps; i++)
+			{
+				trajectoryLine.AddPoint(ToLocal(position));
+
+				velocity.Y += Gravity * stepSize;
+
+				if (wasOnFloor)
+				{
+					if (velocity.Y > 0)
+					{
+						velocity.Y = 0;
+					}
+					velocity.X *= 0.75f;
+				}
+
+				position += velocity * stepSize;
+
+				wasOnFloor = TestMove(new Transform2D(0, position), Vector2.Down);
+			}
+		}
+		else
+		{
+			trajectoryLine.ClearPoints();
+		}
 	}
 
 	private void HandleMouseInput(double delta)

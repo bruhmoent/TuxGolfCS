@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://be8elg2mgf7uu"]
+[gd_scene load_steps=9 format=3 uid="uid://be8elg2mgf7uu"]
 
 [ext_resource type="Script" path="res://Menu.cs" id="1_vjteu"]
 [ext_resource type="Script" path="res://ScrollMenu.cs" id="2_42p1u"]
 [ext_resource type="Texture2D" uid="uid://beyfvv1qqmulo" path="res://Assets/Images/SceneAssets/forest_panorama.png" id="3_gfss5"]
 [ext_resource type="Theme" uid="uid://cyx65s5crkiw8" path="res://Assets/MainMenuTheme.tres" id="3_h54j6"]
 [ext_resource type="Texture2D" uid="uid://b03peki8y7t3a" path="res://Assets/Images/SceneAssets/cloud-mountains-background.png" id="4_x2mus"]
-[ext_resource type="AudioStream" uid="uid://lu05nqmeehwf" path="res://Assets/Music/credits_theme.ogg" id="5_y3m0j"]
+[ext_resource type="Script" path="res://NightDay.gd" id="5_0l78e"]
 [ext_resource type="Texture2D" uid="uid://bf00dcnr6j4w3" path="res://Assets/Images/tuxgolf-logo-alt.png" id="6_jqryc"]
+[ext_resource type="AudioStream" uid="uid://ssuufvemd73n" path="res://Assets/Music/main_menu.ogg" id="7_h1f1f"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(551, 265)
@@ -45,6 +46,7 @@ text = "Story"
 texture_filter = 6
 layout_mode = 2
 theme = ExtResource("3_h54j6")
+disabled = true
 text = "Settings"
 
 [node name="Exit" type="Button" parent="Menu/VBoxContainer"]
@@ -66,6 +68,7 @@ motion_mirroring = Vector2(1031, 0)
 z_index = -3
 position = Vector2(518.386, 911.558)
 texture = ExtResource("4_x2mus")
+script = ExtResource("5_0l78e")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(1150, 0)
@@ -80,16 +83,16 @@ position = Vector2(30, -92)
 scale = Vector2(0.799999, 0.799999)
 texture = ExtResource("6_jqryc")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_y3m0j")
-autoplay = true
-
 [node name="Label" type="Label" parent="."]
-offset_left = 447.0
-offset_top = 351.0
-offset_right = 594.0
-offset_bottom = 374.0
+offset_left = 442.0
+offset_top = 352.0
+offset_right = 589.0
+offset_bottom = 375.0
 text = "bruhmoent © 2024"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_h1f1f")
+autoplay = true
 
 [connection signal="pressed" from="Menu/VBoxContainer/Story" to="Menu" method="_on_story_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Settings" to="Menu" method="_on_settings_pressed"]

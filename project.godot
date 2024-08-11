@@ -10,16 +10,24 @@ config_version=5
 
 [application]
 
-config/name="D:"
+config/name="TuxGolf"
+config/description="TuxGolf - A dynamic 2D platformer game."
+config/version="0.1"
 run/main_scene="res://Main_Menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://Assets/App/loading.png"
+config/icon="res://Assets/App/tuxgolf.png"
 
 [autoload]
 
 SceneManager="*res://Scenes/SceneManager.cs"
 CoinData="*res://CoinData.cs"
 GlobalSignals="*res://Scenes/Objects/SpawnPoint/GlobalSignals.tscn"
+
+[display]
+
+window/size/resizable=false
 
 [dotnet]
 

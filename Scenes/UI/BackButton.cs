@@ -9,6 +9,6 @@ public partial class BackButton : Control
 
 	private void _on_button_pressed()
 	{
-        GetTree().ChangeSceneToFile("res://Scenes/Levels/level_selection.tscn");
-    }
+		GetTree().ChangeSceneToFile("res://Scenes/Levels/level_selection.tscn");
+	}
 }
