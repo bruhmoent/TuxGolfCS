@@ -12,17 +12,22 @@ public partial class RoundBumper : Area2D
 	}
 	private void _on_body_entered(Node body)
 	{
-        if (body is CharacterBody2D character)
-        {
-            Vector2 bumperCenter = GlobalPosition;
-            Vector2 playerPosition = character.GlobalPosition;
-            Vector2 reflectionVector = (playerPosition - bumperCenter).Normalized();
+		if (body is CharacterBody2D character)
+		{
+			Vector2 bumperCenter = GlobalPosition;
+			Vector2 playerPosition = character.GlobalPosition;
+			Vector2 reflectionVector = (playerPosition - bumperCenter).Normalized();
 
-            Vector2 playerVelocity = character.Velocity;
+			Vector2 playerVelocity = character.Velocity;
 
-            Vector2 newVelocity = playerVelocity - 2 * playerVelocity.Dot(reflectionVector) * reflectionVector;
+			Vector2 newVelocity = playerVelocity - 2 * playerVelocity.Dot(reflectionVector) * reflectionVector;
 
-            character.Velocity = newVelocity;
-        }
-    }
+			if (newVelocity.Y > 0)
+			{
+				newVelocity.Y *= -2f;
+			}
+
+			character.Velocity = newVelocity;
+		}
+	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://de1mwbuvjtfly"]
+[gd_scene load_steps=9 format=3 uid="uid://de1mwbuvjtfly"]
 
 [ext_resource type="Texture2D" uid="uid://cvut4f7m8jxk2" path="res://Assets/Images/SceneAssets/world1.png" id="2_t377g"]
 [ext_resource type="Theme" uid="uid://cb5hpgt3id17o" path="res://Scenes/Levels/LevelButton.tres" id="3_sws05"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bswgt5j2xdplq" path="res://coin_display.tscn" id="5_si3vj"]
 [ext_resource type="Texture2D" uid="uid://b1cpr2somwe8j" path="res://Assets/Images/SceneAssets/world_title1.png" id="6_6pp0h"]
 [ext_resource type="Script" path="res://Scenes/Levels/BackLevelSel.cs" id="7_c4s32"]
+[ext_resource type="Texture2D" uid="uid://cwsyccm8i3x4w" path="res://Scenes/Objects/Bumpers/round_bumper.png" id="8_vmfdv"]
 
 [node name="Overworld_LS" type="Node2D"]
 
@@ -25,50 +26,50 @@ script = ExtResource("3_uvlpi")
 
 [node name="Level1" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 8.06676
-offset_top = 2.09877
-offset_right = 70.0668
-offset_bottom = 33.0988
+offset_left = 11.0
+offset_top = 2.0
+offset_right = 73.0
+offset_bottom = 32.0
 scale = Vector2(0.0477755, 0.173045)
 theme = ExtResource("3_sws05")
 text = "1"
 
 [node name="Level2" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 19.0542
-offset_top = 4.1358
-offset_right = 81.0542
-offset_bottom = 35.1358
+offset_left = 24.1655
+offset_top = 6.91358
+offset_right = 86.1655
+offset_bottom = 37.9136
 scale = Vector2(0.0477755, 0.173045)
 theme = ExtResource("3_sws05")
 text = "2"
 
 [node name="Level3" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 29.9374
-offset_top = 10.9877
-offset_right = 91.9374
-offset_bottom = 41.9877
+offset_left = 29.8679
+offset_top = 11.2963
+offset_right = 91.8679
+offset_bottom = 42.2963
 scale = Vector2(0.0477755, 0.173045)
 theme = ExtResource("3_sws05")
 text = "3"
 
 [node name="Level4" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 22.0793
-offset_top = 17.963
-offset_right = 84.0793
-offset_bottom = 48.963
+offset_left = 24.0612
+offset_top = 16.2963
+offset_right = 86.0612
+offset_bottom = 47.2963
 scale = Vector2(0.0477755, 0.173045)
 theme = ExtResource("3_sws05")
 text = "4"
 
 [node name="Level5" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 11.057
-offset_top = 23.0247
-offset_right = 73.057
-offset_bottom = 54.0247
+offset_left = 16.3421
+offset_top = 20.2469
+offset_right = 78.3421
+offset_bottom = 51.2469
 scale = Vector2(0.0477755, 0.173045)
 theme = ExtResource("3_sws05")
 text = "5"
@@ -99,13 +100,36 @@ script = ExtResource("7_c4s32")
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.425
+anchor_right = 1.3
+anchor_bottom = 0.275
 offset_right = 8.0
 offset_bottom = 8.0
 scale = Vector2(1.36, 1.36)
 theme = ExtResource("3_sws05")
 text = "Back"
 metadata/_edit_use_anchors_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(656, 157)
+energy = 0.5
+texture = ExtResource("8_vmfdv")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(444, 108)
+energy = 0.75
+texture = ExtResource("8_vmfdv")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(277, 87)
+texture = ExtResource("8_vmfdv")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(807, 209)
+energy = 0.28
+texture = ExtResource("8_vmfdv")
 
 [connection signal="pressed" from="Control/Level1" to="Control" method="_on_level_1_pressed"]
 [connection signal="pressed" from="Control/Level2" to="Control" method="_on_level_2_pressed"]

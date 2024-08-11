@@ -16,9 +16,9 @@ public partial class Menu : Control
 	{
 		//...
 	}
-    private void _on_exit_pressed()
-    {
-        GetTree().Quit();
-    }
+	private void _on_exit_pressed()
+	{
+		GetTree().Quit();
+	}
 
 }
