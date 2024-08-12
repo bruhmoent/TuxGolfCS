@@ -1047,6 +1047,7 @@ layer_0/tile_data = PackedInt32Array(-524234, 0, 196608, 18, 0, 65536, 21, 0, 65
 
 [node name="PickUp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_mkhfa")
+attenuation = 0.00680118
 
 [node name="Decoration" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_e57p5")

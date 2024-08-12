@@ -79,9 +79,9 @@ stream = ExtResource("4_lhubr")
 autoplay = true
 
 [node name="CoinDisplay" parent="." instance=ExtResource("5_si3vj")]
-offset = Vector2(20, 20)
+offset = Vector2(1035, 80)
 scale = Vector2(1.68, 1.68)
-transform = Transform2D(1.68, 0, 0, 1.68, 20, 20)
+transform = Transform2D(1.68, 0, 0, 1.68, 1035, 80)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(1051, 61)

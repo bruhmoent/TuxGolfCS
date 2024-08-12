@@ -15,13 +15,14 @@ public partial class Player : CharacterBody2D
 	private const float MaxIndicatorLength = 110.0f;
 	private const int MaxHealth = 3;
 	private const float DeathYThreshold = 600.0f;
-	private Line2D trajectoryLine;
+	private const float Damping = 0.95f;
+	private const float RollingSpeedMultiplier = 10.0f;
 
 	// Variables for golf ball control
 	private Vector2 dragStartPos;
 	private Vector2 dragEndPos;
 	private float shootingForce;
-	private const float Damping = 0.95f;
+	private Line2D trajectoryLine;
 
 	// Visual elements
 	private Sprite2D playerSprite;
@@ -29,8 +30,8 @@ public partial class Player : CharacterBody2D
 	private int currentHealth = MaxHealth;
 	private CanvasLayer heartsCanvas;
 	private Control container;
-	Vector2 rectSize;
-	float startingX = 0f;
+	private Vector2 rectSize;
+	private float startingX = 0f;
 	private bool isInvincible = false;
 	private float invincibilityDuration = 1.0f;
 	private Timer invincibilityTimer;
@@ -41,6 +42,7 @@ public partial class Player : CharacterBody2D
 	{
 		Hurtable
 	}
+
 	public Tags Tag { get; set; } = Tags.Hurtable;
 
 	public override void _Ready()
@@ -48,14 +50,14 @@ public partial class Player : CharacterBody2D
 		playerSprite = GetNode<Sprite2D>("PlayerSprite");
 		directionIndicator = GetNode<Sprite2D>("DirectionIndicatorSprite");
 		trajectoryLine = GetNode<Line2D>("TrajectoryLine");
-		UpdateDirectionIndicator();
 		heartsCanvas = GetNode<CanvasLayer>("HeartsCanvas");
 		container = heartsCanvas.GetNode<Control>("Control");
-		var heartTexture = GD.Load<Texture2D>("res://Scenes/UI/heart_texture.png");
-		var heartWidth = heartTexture.GetWidth();
-		var heartHeight = heartTexture.GetHeight();
 
-		rectSize = new Vector2(heartWidth * MaxHealth, heartHeight);
+		UpdateDirectionIndicator();
+
+		var heartTexture = GD.Load<Texture2D>("res://Scenes/UI/heart_texture.png");
+		rectSize = new Vector2(heartTexture.GetWidth() * MaxHealth, heartTexture.GetHeight());
+
 		heartsCanvas.Offset = new Vector2((GetViewportRect().Size.X - rectSize.X) / 2, rectSize.Y);
 		startingX = heartsCanvas.Offset.X;
 
@@ -64,11 +66,10 @@ public partial class Player : CharacterBody2D
 		invincibilityTimer.WaitTime = invincibilityDuration;
 		invincibilityTimer.OneShot = true;
 		invincibilityTimer.Connect("timeout", new Callable(this, "_onInvincibilityTimerTimeout"));
-		
- 		camera = GetTree().Root.GetNode<Camera2D>("TemplateLevel/Camera2D");
-		
-		SetProcess(true);
 
+		camera = GetTree().Root.GetNode<Camera2D>("TemplateLevel/Camera2D");
+
+		SetProcess(true);
 		UpdateHearts();
 	}
 
@@ -98,6 +99,7 @@ public partial class Player : CharacterBody2D
 		}
 
 		HandleCameraPeeking((float)delta);
+
 		if (GlobalPosition.Y > DeathYThreshold)
 		{
 			GetHurt(3);
@@ -113,6 +115,7 @@ public partial class Player : CharacterBody2D
 	private void FlashPlayerSprite()
 	{
 		playerSprite.Visible = true;
+
 		Timer flashTimer = new Timer();
 		flashTimer.WaitTime = 0.1;
 		flashTimer.OneShot = true;
@@ -162,12 +165,23 @@ public partial class Player : CharacterBody2D
 		{
 			velocity.X *= 0.75f;
 		}
+		
+		RotatePlayerSpriteBasedOnVelocity(velocity);
 		Velocity = velocity;
-
 		UpdateIndicatorLength();
-
 		MoveAndSlide();
 		UpdateTrajectory(delta);
+	}
+	
+	private void RotatePlayerSpriteBasedOnVelocity(Vector2 velocity)
+	{
+		if (velocity.Length() > 0)
+		{
+			float angle = Mathf.Atan2(velocity.Y, velocity.X);
+			float degrees = Mathf.RadToDeg(angle);
+
+			playerSprite.RotationDegrees = degrees;
+		}
 	}
 	
 	private void UpdateTrajectory(double delta)
@@ -224,7 +238,6 @@ public partial class Player : CharacterBody2D
 				}
 
 				dragEndPos = GetGlobalMousePosition();
-
 				shootingForce = Mathf.Clamp((dragStartPos - dragEndPos).Length(), MinForce, MaxForce);
 
 				RotatePlayerSprite(dragStartPos, dragEndPos);
@@ -239,24 +252,21 @@ public partial class Player : CharacterBody2D
 	private void ShootBall()
 	{
 		Vector2 direction = (dragStartPos - dragEndPos).Normalized();
-
 		Velocity = direction * shootingForce;
 	}
 
 	private void RotatePlayerSprite(Vector2 start, Vector2 end)
 	{
 		float angle = Mathf.Atan2(end.Y - start.Y, end.X - start.X);
-
 		float degrees = Mathf.RadToDeg(angle);
 
-		playerSprite.RotationDegrees = degrees;
+		playerSprite.RotationDegrees = degrees + 180.0f;
 		directionIndicator.RotationDegrees = degrees + 180.0f;
 	}
 
 	private void UpdateIndicatorLength()
 	{
 		float indicatorLength = Mathf.Lerp(0, MaxIndicatorLength, shootingForce / MaxForce);
-
 		directionIndicator.Scale = new Vector2(indicatorLength / 30, 1);
 	}
 
@@ -264,11 +274,11 @@ public partial class Player : CharacterBody2D
 	{
 		directionIndicator.Scale = new Vector2(1, 1);
 	}
-	
+
 	private void HandleCameraPeeking(float delta)
 	{
 		Vector2 cameraMove = new Vector2();
-		
+
 		if (Input.IsActionPressed("camera_up")) // Numpad Up
 		{
 			cameraMove.Y -= cameraSpeed * delta;
