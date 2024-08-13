@@ -1067,8 +1067,3 @@ format = 2
 modulate = Color(0.969287, 0.779328, 0.565421, 1)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("22_r0ifl")]
-
-[connection signal="body_entered" from="TileMap2/Spikes1" to="TileMap2/Spikes1" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap2/@Area2D@25851" to="TileMap2/@Area2D@25851" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap2/@Area2D@25858" to="TileMap2/@Area2D@25858" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap2/@Area2D@25859" to="TileMap2/@Area2D@25859" method="_on_body_entered"]

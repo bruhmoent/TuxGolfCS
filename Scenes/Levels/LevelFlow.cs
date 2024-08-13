@@ -86,7 +86,8 @@ public partial class LevelFlow : Control
 			{
 				levelButton.Text = $"{i}";
 				if (isCompleted)
-					levelButton.Text = "✓";
+					levelButton.Text = "️√";
+				
 				levelButton.Disabled = false;
 			}
 			else

@@ -13,6 +13,7 @@ script = ExtResource("1_7be63")
 texture = ExtResource("3_3p6r8")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+z_index = 5
 texture = ExtResource("1_26dfj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
