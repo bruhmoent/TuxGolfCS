@@ -3,9 +3,10 @@ using System;
 
 namespace LevelIndex
 {
-    public static class CurrentLevelIndex
-    {
-        public static int levelIndex = 1;
-    }
+	public static class CurrentLevelIndex
+	{
+		public static int levelIndex = 1;
+	}
 }
-    public partial class CurrentLevel : Node2D{}
+
+public partial class CurrentLevel : Node2D{}

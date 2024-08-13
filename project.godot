@@ -24,10 +24,11 @@ config/icon="res://Assets/App/tuxgolf.png"
 SceneManager="*res://Scenes/SceneManager.cs"
 CoinData="*res://CoinData.cs"
 GlobalSignals="*res://Scenes/Objects/SpawnPoint/GlobalSignals.tscn"
+GlobalConfig="*res://global_config.tscn"
 
 [display]
 
-window/size/resizable=false
+window/stretch/mode="viewport"
 
 [dotnet]
 

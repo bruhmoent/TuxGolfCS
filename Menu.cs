@@ -3,8 +3,7 @@ using System;
 
 public partial class Menu : Control
 {
-	public override void _Ready(){
-	}
+	public override void _Ready(){}
 
 	public override void _Process(double delta){}
 
@@ -15,11 +14,11 @@ public partial class Menu : Control
 
 	private void _on_settings_pressed()
 	{
-		//...
+		GetTree().ChangeSceneToFile("res://settings.tscn");
 	}
+	
 	private void _on_exit_pressed()
 	{
 		GetTree().Quit();
 	}
-
 }

@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://brpe1hmmddcwm"]
+
+[ext_resource type="Script" path="res://ScrollMenu.cs" id="1_2m8rb"]
+[ext_resource type="Texture2D" uid="uid://b03peki8y7t3a" path="res://Assets/Images/SceneAssets/cloud-mountains-background.png" id="2_kbgi5"]
+[ext_resource type="Script" path="res://NightDay.gd" id="3_l6f2x"]
+[ext_resource type="Texture2D" uid="uid://e2iwf27k2u21" path="res://Assets/Images/SceneAssets/forest_panorama_settings.png" id="4_3o15h"]
+[ext_resource type="Script" path="res://Setting.cs" id="5_j66hs"]
+[ext_resource type="Theme" uid="uid://cyx65s5crkiw8" path="res://Assets/MainMenuTheme.tres" id="5_lj1qn"]
+[ext_resource type="AudioStream" uid="uid://di404c76urj31" path="res://Assets/Music/settings.ogg" id="7_3hm30"]
+[ext_resource type="Script" path="res://Scenes/Levels/BackLevelSel.cs" id="7_71v2f"]
+[ext_resource type="Theme" uid="uid://cb5hpgt3id17o" path="res://Scenes/Levels/LevelButton.tres" id="8_v5iyx"]
+
+[node name="Settings" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_2m8rb")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(-3, -1)
+scale = Vector2(1.117, 1.04)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1031, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+z_index = -3
+position = Vector2(518.386, 911.558)
+texture = ExtResource("2_kbgi5")
+script = ExtResource("3_l6f2x")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1150, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(576, 324.5)
+scale = Vector2(0.898438, 0.893056)
+texture = ExtResource("4_3o15h")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 537.0
+offset_top = 135.0
+offset_right = 607.0
+offset_bottom = 237.0
+script = ExtResource("5_j66hs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = -149.0
+offset_top = 66.0
+offset_right = 130.0
+offset_bottom = 227.0
+scale = Vector2(1.39257, 1.43324)
+alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume: 0%"
+
+[node name="VolumeSlider" type="HSlider" parent="Menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Keybinds" type="Button" parent="Menu/VBoxContainer"]
+texture_filter = 6
+layout_mode = 2
+theme = ExtResource("5_lj1qn")
+disabled = true
+text = "Keybinds
+"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3hm30")
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 608.0
+offset_right = 47.0
+offset_bottom = 648.0
+script = ExtResource("7_71v2f")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.425
+anchor_right = 1.3
+anchor_bottom = 0.275
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(1.36, 1.36)
+theme = ExtResource("8_v5iyx")
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="value_changed" from="Menu/VBoxContainer/VolumeSlider" to="Menu" method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Keybinds" to="Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="CanvasLayer/Control" method="_on_button_pressed"]

@@ -1056,6 +1056,7 @@ layer_0/tile_data = PackedInt32Array(-196598, 0, 65536, -196591, 0, 65536, -8519
 
 [node name="PickUp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_qld2r")
+max_distance = 99999.0
 attenuation = 0.000110016
 
 [node name="Decoration" type="TileMap" parent="."]

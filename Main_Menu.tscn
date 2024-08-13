@@ -46,7 +46,6 @@ text = "Story"
 texture_filter = 6
 layout_mode = 2
 theme = ExtResource("3_h54j6")
-disabled = true
 text = "Settings"
 
 [node name="Exit" type="Button" parent="Menu/VBoxContainer"]

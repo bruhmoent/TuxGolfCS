@@ -52,6 +52,7 @@ public partial class TriggerWin : Node2D
 		LevelState.SaveState();
 		CallDeferred(nameof(PlayWinSoundAndChangeScene), "res://Scenes/Levels/level_selection.tscn");
 	}
+	
 	private void PlayWinSoundAndChangeScene(string scenePath)
 	{
 		AudioStreamPlayer2D winSoundPlayer = GetNode<AudioStreamPlayer2D>("WinSoundPlayer");
@@ -59,6 +60,5 @@ public partial class TriggerWin : Node2D
 		GetTree().Root.AddChild(winSoundPlayer);
 		winSoundPlayer.Play();
 		GetTree().ChangeSceneToFile("res://Scenes/Levels/level_selection.tscn");
-
 	}
 }

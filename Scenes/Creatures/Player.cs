@@ -17,6 +17,8 @@ public partial class Player : CharacterBody2D
 	private const float DeathYThreshold = 600.0f;
 	private const float Damping = 0.95f;
 	private const float RollingSpeedMultiplier = 10.0f;
+	private const float ForceMultiplier = 1.0f;
+	private Vector2 viewportSize;
 
 	// Variables for golf ball control
 	private Vector2 dragStartPos;
@@ -37,6 +39,10 @@ public partial class Player : CharacterBody2D
 	private Timer invincibilityTimer;
 	private Camera2D camera;
 	private float cameraSpeed = 1200.0f;
+	private float directionIndicatorOpacity = 1.0f;
+	private const float FadeOutSpeed = 2.0f;
+	private const float FadeInSpeed = 4.0f;
+	private bool wasAirborne = false;
 
 	public enum Tags
 	{
@@ -66,6 +72,7 @@ public partial class Player : CharacterBody2D
 		invincibilityTimer.WaitTime = invincibilityDuration;
 		invincibilityTimer.OneShot = true;
 		invincibilityTimer.Connect("timeout", new Callable(this, "_onInvincibilityTimerTimeout"));
+		viewportSize = GetViewportRect().Size;
 
 		camera = GetTree().Root.GetNode<Camera2D>("TemplateLevel/Camera2D");
 
@@ -156,14 +163,25 @@ public partial class Player : CharacterBody2D
 
 		velocity.Y += Gravity * (float)delta;
 
-		if (IsOnFloor() && velocity.Y > 0)
-		{
-			velocity.Y = 0;
-		}
-
 		if (IsOnFloor())
 		{
+			if (velocity.Y > 0)
+			{
+				velocity.Y = 0;
+			}
 			velocity.X *= 0.75f;
+
+			if (wasAirborne)
+			{
+				wasAirborne = false;
+			}
+
+			FadeInDirectionIndicator((float)delta);
+		}
+		else
+		{
+			FadeOutDirectionIndicator((float)delta);
+			wasAirborne = true;
 		}
 		
 		RotatePlayerSpriteBasedOnVelocity(velocity);
@@ -171,6 +189,18 @@ public partial class Player : CharacterBody2D
 		UpdateIndicatorLength();
 		MoveAndSlide();
 		UpdateTrajectory(delta);
+	}
+	
+	private void FadeOutDirectionIndicator(float delta)
+	{
+		directionIndicatorOpacity = Mathf.Max(0, directionIndicatorOpacity - FadeOutSpeed * delta);
+		directionIndicator.Modulate = new Color(1, 1, 1, directionIndicatorOpacity);
+	}
+	
+	private void FadeInDirectionIndicator(float delta)
+	{
+		directionIndicatorOpacity = Mathf.Min(1, directionIndicatorOpacity + FadeInSpeed * delta);
+		UpdateDirectionIndicatorOpacity();
 	}
 	
 	private void RotatePlayerSpriteBasedOnVelocity(Vector2 velocity)
@@ -234,11 +264,11 @@ public partial class Player : CharacterBody2D
 			{
 				if (Input.IsActionJustPressed("ui_click"))
 				{
-					dragStartPos = GetGlobalMousePosition();
+					dragStartPos = GetLocalMousePosition();
 				}
 
-				dragEndPos = GetGlobalMousePosition();
-				shootingForce = Mathf.Clamp((dragStartPos - dragEndPos).Length(), MinForce, MaxForce);
+				dragEndPos = GetLocalMousePosition();
+				shootingForce = CalculateShootingForce();
 
 				RotatePlayerSprite(dragStartPos, dragEndPos);
 			}
@@ -247,6 +277,15 @@ public partial class Player : CharacterBody2D
 				ShootBall();
 			}
 		}
+	}
+	
+	private float CalculateShootingForce()
+	{
+		Vector2 dragVector = dragStartPos - dragEndPos;
+		float maxDistance = Mathf.Min(viewportSize.X, viewportSize.Y) * 0.5f;
+		float normalizedDistance = dragVector.Length() / maxDistance;
+		float force = Mathf.Lerp(MinForce, MaxForce, normalizedDistance * ForceMultiplier);
+		return Mathf.Clamp(force, MinForce, MaxForce);
 	}
 
 	private void ShootBall()
@@ -270,9 +309,16 @@ public partial class Player : CharacterBody2D
 		directionIndicator.Scale = new Vector2(indicatorLength / 30, 1);
 	}
 
+	private void UpdateDirectionIndicatorOpacity()
+	{
+		directionIndicator.Modulate = new Color(1, 1, 1, directionIndicatorOpacity);
+	}
+
 	private void UpdateDirectionIndicator()
 	{
 		directionIndicator.Scale = new Vector2(1, 1);
+		directionIndicatorOpacity = 1.0f;
+		UpdateDirectionIndicatorOpacity();
 	}
 
 	private void HandleCameraPeeking(float delta)

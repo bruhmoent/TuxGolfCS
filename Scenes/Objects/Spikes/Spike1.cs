@@ -4,13 +4,10 @@ using System.Linq;
 
 public partial class Spike1 : Area2D
 {
-	public override void _Ready()
-	{
-	}
+	public override void _Ready(){}
 
-	public override void _Process(double delta)
-	{
-	}
+	public override void _Process(double delta){}
+	
 	private bool HasEnumTag(Node body, string tagName)
 	{
 		Type objectType = body.GetType();
@@ -25,15 +22,14 @@ public partial class Spike1 : Area2D
 		return false;
 	}
 
-   private void _on_body_entered(Node body)
-{
-	if (HasEnumTag(body, "Hurtable"))
+	private void _on_body_entered(Node body)
 	{
-		if (body is Player player)
+		if (HasEnumTag(body, "Hurtable"))
 		{
-			player.GetHurt(1);
+			if (body is Player player)
+			{
+				player.GetHurt(1);
+			}
 		}
 	}
-}
-
 }
