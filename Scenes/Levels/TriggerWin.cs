@@ -17,7 +17,7 @@ public partial class TriggerWin : Node2D
 	private void MarkCurrentLevelComplete()
 	{
 		int currentSceneNumber = CurrentLevelIndex.levelIndex;
-
+		GD.Print($"Current level index: {currentSceneNumber}");
 		MarkLevelComplete(currentSceneNumber);
 	}
 
