@@ -105,8 +105,6 @@ public partial class Player : CharacterBody2D
 			playerSprite.Visible = !playerSprite.Visible;
 		}
 
-		HandleCameraPeeking((float)delta);
-
 		if (GlobalPosition.Y > DeathYThreshold)
 		{
 			GetHurt(3);
@@ -189,9 +187,11 @@ public partial class Player : CharacterBody2D
 		UpdateIndicatorLength();
 		MoveAndSlide();
 		UpdateTrajectory(delta);
-	}
-	
-	private void FadeOutDirectionIndicator(float delta)
+        HandleCameraPeeking((float)delta);
+
+    }
+
+    private void FadeOutDirectionIndicator(float delta)
 	{
 		directionIndicatorOpacity = Mathf.Max(0, directionIndicatorOpacity - FadeOutSpeed * delta);
 		directionIndicator.Modulate = new Color(1, 1, 1, directionIndicatorOpacity);
@@ -325,26 +325,25 @@ public partial class Player : CharacterBody2D
 	{
 		Vector2 cameraMove = new Vector2();
 
-		if (Input.IsActionPressed("camera_up")) // Numpad Up
+		if (Input.IsActionPressed("camera_up"))
 		{
 			cameraMove.Y -= cameraSpeed * delta;
 		}
-		if (Input.IsActionPressed("camera_down")) // Numpad Down
+		if (Input.IsActionPressed("camera_down"))
 		{
 			cameraMove.Y += cameraSpeed * delta;
 		}
-		if (Input.IsActionPressed("camera_left")) // Numpad Left
+		if (Input.IsActionPressed("camera_left"))
 		{
 			cameraMove.X -= cameraSpeed * delta;
 		}
-		if (Input.IsActionPressed("camera_right")) // Numpad Right
+		if (Input.IsActionPressed("camera_right"))
 		{
 			cameraMove.X += cameraSpeed * delta;
 		}
 
 		camera.Position += cameraMove;
 	}
-
 	public void _on_bump(Vector2 bumpVector)
 	{
 		shootingForce = 0;

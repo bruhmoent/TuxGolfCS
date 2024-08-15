@@ -28,7 +28,7 @@ GlobalConfig="*res://global_config.tscn"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
