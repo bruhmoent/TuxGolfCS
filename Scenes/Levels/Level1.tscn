@@ -629,8 +629,8 @@ motion_scale = Vector2(0.05, 0.05)
 motion_mirroring = Vector2(1150, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(576, 324.5)
-scale = Vector2(0.898438, 0.893056)
+position = Vector2(576, 330.5)
+scale = Vector2(0.898438, 0.909722)
 texture = ExtResource("7_3jeba")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]

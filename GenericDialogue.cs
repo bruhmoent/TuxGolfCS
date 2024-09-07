@@ -20,7 +20,7 @@ public partial class GenericDialogue : Control
 
 		dialogues = new string[]
 		{
-			"[center]Welcome To [i]Galflands![/i] [b] Press enter to skip.[/b][/center]",
+			"[center]Welcome To [i]Galflands![/i]\n[b] Press enter to continue.[/b][/center]",
 			"You can drag your mouse whilst holding the right mouse button to change the direction, angle and force of the shot.",
 			"Also... you can pan around the camera using [b]WASD[/b].",
 			"[center]Have fun? [i]...[/i][/center].",

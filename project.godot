@@ -96,4 +96,4 @@ ui_shoot={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.137319, 0.346248, 0.257662, 1)
+environment/defaults/default_clear_color=Color(0.266667, 0.25098, 0.254902, 1)
